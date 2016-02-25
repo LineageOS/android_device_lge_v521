@@ -39,7 +39,8 @@ on early-init
     mkdir /mpt 0755 system system
 
 on fs
-    wait /dev/block/bootdevice
+    wait /dev/block/platform/soc.0/${ro.boot.bootdevice}
+    symlink /dev/block/platform/soc.0/${ro.boot.bootdevice} /dev/block/bootdevice
     mount_all fstab.qcom
     write /proc/sys/vm/swappiness 100
 
