@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (C) 2016 The CyanogenMod Project
+# Copyright (C) 2017 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,6 +16,9 @@
 #
 
 set -e
+
+export DEVICE=v521
+export VENDOR=lge
 
 # Load extract_utils and do some sanity checks
 MY_DIR="${BASH_SOURCE%/*}"
@@ -53,26 +56,12 @@ else
     fi
 fi
 
-# Initialize the helper for common device
-setup_vendor "$DEVICE_COMMON" "$VENDOR" "$CM_ROOT" true
+# Initialize the helper
+setup_vendor "$DEVICE" "$VENDOR" "$CM_ROOT" true
 
 extract "$MY_DIR"/proprietary-files-qc.txt "$QC_SRC"
 extract "$MY_DIR"/proprietary-files-qc-64.txt "$QC_SRC"
 extract "$MY_DIR"/proprietary-files.txt "$SRC"
 extract "$MY_DIR"/proprietary-files-64.txt "$SRC"
-
-# Check if there is a variant list
-VARIANT_LIST="$CM_ROOT"/device/"$VENDOR"/"$DEVICE"/proprietary-files.txt
-if [ ! -f "$VARIANT_LIST" ]; then
-    echo "$DEVICE does not have any variant specific blobs"
-else
-
-# Reinitialize the helper for device
-setup_vendor "$DEVICE" "$VENDOR" "$CM_ROOT"
-
-extract "$MY_DIR"/../$DEVICE/proprietary-files.txt "$SRC"
-extract "$MY_DIR"/../$DEVICE/proprietary-files-64.txt "$SRC"
-
-fi
 
 "$MY_DIR"/setup-makefiles.sh

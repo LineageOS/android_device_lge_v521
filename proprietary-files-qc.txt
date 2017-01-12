@@ -26,6 +26,7 @@ vendor/lib/soundfx/libqcvirt.so
 
 # Bluetooth
 bin/hci_qcomm_init
+lib/libaptXScheduler.so
 vendor/lib/libbtnv.so
 
 # CNE
@@ -65,10 +66,12 @@ bin/qseecomd
 vendor/bin/qseeproxydaemon
 vendor/lib/libdrmfs.so
 vendor/lib/libdrmtime.so
+vendor/lib/libGPreqcancel.so
 vendor/lib/librpmb.so
 vendor/lib/libqisl.so
 vendor/lib/libQSEEComAPI.so
 vendor/lib/librpmb.so
+vendor/lib/lib-sec-disp.so
 vendor/lib/libSecureUILib.so
 vendor/lib/libsecureui.so
 vendor/lib/libsecureui_svcsock.so
@@ -205,6 +208,7 @@ vendor/lib/libsensor_reg.so
 vendor/lib/libsensor_test.so
 vendor/lib/libsensor_thresh.so
 vendor/lib/libsensor_user_cal.so
+vendor/lib/sensors.oem.so
 vendor/lib/sensors.ssc.so
 
 # Thermal

@@ -20,7 +20,7 @@
 #include <cutils/properties.h>
 #include <string.h>
 
-#define BTM_DEF_LOCAL_NAME "LG MSM8952"
+#define BTM_DEF_LOCAL_NAME "LG G Pad X"
 
 #define BT_CLEAN_TURN_ON_DISABLED 1
 

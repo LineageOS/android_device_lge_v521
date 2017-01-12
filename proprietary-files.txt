@@ -6,12 +6,14 @@ lib/libmmjpeg_interface.so
 lib/libmorpho_image_stab31.so
 lib/libmm-qcamera.so
 lib/libqomx_core.so
+vendor/lib/libchromaflash.so
 vendor/lib/libflash_pmic.so
 vendor/lib/libjpegdhw.so
 vendor/lib/libjpegdmahw.so
 vendor/lib/libjpegehw.so
 vendor/lib/libmmcamera2_c2d_module.so
 vendor/lib/libmmcamera2_cpp_module.so
+vendor/lib/libmmcamera2_dcrf.so
 vendor/lib/libmmcamera2_frame_algorithm.so
 vendor/lib/libmmcamera2_iface_modules.so
 vendor/lib/libmmcamera2_imglib_modules.so
@@ -27,12 +29,15 @@ vendor/lib/libmmcamera2_stats_algorithm.so
 vendor/lib/libmmcamera2_stats_modules.so
 vendor/lib/libmmcamera2_vpe_module.so
 vendor/lib/libmmcamera2_wnr_module.so
+vendor/lib/libmmcamera_chromaflash_lib.so
+vendor/lib/libmmcamera_dcrf_lib.so
 vendor/lib/libmmcamera_eeprom_util.so
 vendor/lib/libmmcamera_eztune_module.so
 vendor/lib/libmmcamera_faceproc.so
 vendor/lib/libmmcamera_hdr_gb_lib.so
 vendor/lib/libmmcamera_hi553.so
 vendor/lib/libmmcamera_imglib.so
+vendor/lib/libmmcamera_isp_abcc44.so
 vendor/lib/libmmcamera_isp_abf40.so
 vendor/lib/libmmcamera_isp_bcc40.so
 vendor/lib/libmmcamera_isp_be_stats44.so
@@ -66,6 +71,8 @@ vendor/lib/libmmcamera_isp_scaler_viewfinder44.so
 vendor/lib/libmmcamera_isp_sce40.so
 vendor/lib/libmmcamera_isp_sub_module.so
 vendor/lib/libmmcamera_isp_wb40.so
+vendor/lib/libmmcamera_llvd.so
+vendor/lib/libmmcamera_optizoom_lib.so
 vendor/lib/libmmcamera_ov8858.so
 vendor/lib/libmmcamera_ov8858_eeprom.so
 vendor/lib/libmmcamera_pdaf.so
@@ -78,14 +85,17 @@ vendor/lib/libmmcamera_tintless_algo.so
 vendor/lib/libmmcamera_tintless_bg_pca_algo.so
 vendor/lib/libmmcamera_tuning.so
 vendor/lib/libmmcamera_tuning_lookup.so
+vendor/lib/libmmcamera_ubifocus_lib.so
 vendor/lib/libmmcamera_vpu_module.so
 vendor/lib/libmmjpeg.so
 vendor/lib/libmmqjpeg_codec.so
 vendor/lib/libmmqjpegdma.so
 vendor/lib/libois_lc898122.so
+vendor/lib/liboptizoom.so
 vendor/lib/libqomx_jpegdec.so
 vendor/lib/libqomx_jpegenc_pipe.so
 vendor/lib/libqomx_jpegenc.so
+vendor/lib/libubifocus.so
 
 # Camera actuators
 vendor/lib/libactuator_ad5816g.so
@@ -100,6 +110,7 @@ vendor/lib/libactuator_dw9761b.so
 vendor/lib/libactuator_lc898122.so
 vendor/lib/libactuator_lc898212xd.so
 vendor/lib/libactuator_rohm_bu64243gwz.so
+vendor/lib/libactuator_zc533.so
 
 # Camera chromatix
 vendor/lib/libchromatix_hi553_a3_default_preview.so
@@ -175,8 +186,6 @@ vendor/lib/libchromatix_s5k5e2_preview.so
 vendor/lib/libchromatix_s5k5e2_snapshot.so
 vendor/lib/libchromatix_s5k5e2_zsl_preview_dw9716.so
 vendor/lib/libchromatix_s5k5e2_zsl_video_dw9716.so
-vendor/lib/libmmcamera_isp_chroma_enhan40.so
-vendor/lib/libmmcamera_isp_chroma_suppress40.so
 
 # Camera firmware
 etc/firmware/cpp_firmware_v1_1_1.fw
@@ -187,9 +196,12 @@ etc/firmware/cpp_firmware_v1_5_0.fw
 etc/firmware/cpp_firmware_v1_6_0.fw
 etc/firmware/cpp_firmware_v1_8_0.fw
 
+# IR
+lib/hw/consumerir.msm8952.so
+
 # Radio
-#bin/rild
-#lib/libril.so
+bin/rild
+lib/libril.so
 lib/libuicc.so
 vendor/qcril.db
 

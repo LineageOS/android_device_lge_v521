@@ -17,6 +17,9 @@
 
 set -e
 
+export DEVICE=v521
+export VENDOR=lge
+
 # Load extract_utils and do some sanity checks
 MY_DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$MY_DIR" ]]; then MY_DIR="$PWD"; fi
@@ -30,17 +33,17 @@ if [ ! -f "$HELPER" ]; then
 fi
 . "$HELPER"
 
-# Initialize the helper for common device
-setup_vendor "$DEVICE_COMMON" "$VENDOR" "$CM_ROOT" true
+# Initialize the helper
+setup_vendor "$DEVICE" "$VENDOR" "$CM_ROOT" true
 
 # Copyright headers and common guards
-write_headers "msm8952 v521"
+write_headers "v521"
 
 # The standard blobs
 write_makefiles "$MY_DIR"/proprietary-files.txt
 
-printf '\n%s\n' "ifeq (\$(FORCE_32_BIT),)" >> "$PRODUCTMK"
-printf '\n%s\n' "ifeq (\$(FORCE_32_BIT),)" >> "$ANDROIDMK"
+printf '\n%s\n' "ifeq (\$(FORCE_64_BIT),true)" >> "$PRODUCTMK"
+printf '\n%s\n' "ifeq (\$(FORCE_64_BIT),true)" >> "$ANDROIDMK"
 
 write_makefiles "$MY_DIR"/proprietary-files-64.txt
 
@@ -55,8 +58,8 @@ printf '\n%s\n' "ifeq (\$(QCPATH),)" >> "$ANDROIDMK"
 write_makefiles "$MY_DIR"/proprietary-files-qc.txt
 printf '\n%s\n' "\$(call inherit-product, vendor/qcom/binaries/msm8916-32/graphics/graphics-vendor.mk)" >> "$PRODUCTMK"
 
-printf '\n%s\n' "ifeq (\$(FORCE_32_BIT),)" >> "$PRODUCTMK"
-printf '\n%s\n' "ifeq (\$(FORCE_32_BIT),)" >> "$ANDROIDMK"
+printf '\n%s\n' "ifeq (\$(FORCE_64_BIT),true)" >> "$PRODUCTMK"
+printf '\n%s\n' "ifeq (\$(FORCE_64_BIT),true)" >> "$ANDROIDMK"
 
 write_makefiles "$MY_DIR"/proprietary-files-qc-64.txt
 printf '\n%s\n' "\$(call inherit-product, vendor/qcom/binaries/msm8916-64/graphics/graphics-vendor.mk)" >> "$PRODUCTMK"
@@ -67,25 +70,7 @@ echo "endif" >> "$ANDROIDMK"
 echo "endif" >> "$PRODUCTMK"
 echo "endif" >> "$ANDROIDMK"
 
-# We are done with common
-write_footers
-
-# Check if there is a variant list
-VARIANT_LIST="$CM_ROOT"/device/"$VENDOR"/"$DEVICE"/proprietary-files.txt
-if [ ! -f "$VARIANT_LIST" ]; then
-    echo "$DEVICE does not have any variant specific blobs"
-else
-
-# Reinitialize the helper for device
-setup_vendor "$DEVICE" "$VENDOR" "$CM_ROOT"
-
-# Copyright headers and guards
-write_headers
-
-write_makefiles "$MY_DIR"/../$DEVICE/proprietary-files.txt
-write_makefiles "$MY_DIR"/../$DEVICE/proprietary-files-64.txt
-
-# We are done with device
+# We are done
 write_footers
 
 fi
