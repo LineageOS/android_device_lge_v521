@@ -32,28 +32,34 @@ fi
 
 if [ $# -eq 0 ]; then
     SRC=adb
+    QC_SRC=adb
 else
     if [ $# -eq 1 ]; then
         SRC=$1
+        QC_SRC=$1
     else
-        echo "$0: bad number of arguments"
-        echo ""
-        echo "usage: $0 [PATH_TO_EXPANDED_ROM]"
-        echo ""
-        echo "If PATH_TO_EXPANDED_ROM is not specified, blobs will be extracted from"
-        echo "the device using adb pull."
-        exit 1
+        if [ $# -eq 2 ]; then
+            SRC=$1
+            QC_SRC=$2
+        else
+            echo "$0: bad number of arguments"
+            echo ""
+            echo "usage: $0 [PATH_TO_EXPANDED_ROM]"
+            echo ""
+            echo "If PATH_TO_EXPANDED_ROM is not specified, blobs will be extracted from"
+            echo "the device using adb pull."
+            exit 1
+        fi
     fi
 fi
 
 # Initialize the helper for common device
 setup_vendor "$DEVICE_COMMON" "$VENDOR" "$CM_ROOT" true
 
+extract "$MY_DIR"/proprietary-files-qc.txt "$QC_SRC"
+extract "$MY_DIR"/proprietary-files-qc-64.txt "$QC_SRC"
 extract "$MY_DIR"/proprietary-files.txt "$SRC"
-
-if [ "$DEVICE_ARCH" == "64" ]; then
 extract "$MY_DIR"/proprietary-files-64.txt "$SRC"
-fi
 
 # Check if there is a variant list
 VARIANT_LIST="$CM_ROOT"/device/"$VENDOR"/"$DEVICE"/proprietary-files.txt
@@ -65,10 +71,7 @@ else
 setup_vendor "$DEVICE" "$VENDOR" "$CM_ROOT"
 
 extract "$MY_DIR"/../$DEVICE/proprietary-files.txt "$SRC"
-
-if [ "$DEVICE_ARCH" == "64" ]; then
 extract "$MY_DIR"/../$DEVICE/proprietary-files-64.txt "$SRC"
-fi
 
 fi
 

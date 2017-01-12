@@ -33,7 +33,7 @@ persist.audio.fluence.speaker=true
 persist.hwc.mdpcomp.enable=true
 
 # OpenGLES
-ro.opengles.version=196609
+ro.opengles.version=196610
 
 # Perf
 ro.core_ctl_min_cpu=2
@@ -67,3 +67,6 @@ persist.sensors.mag_enabled=false
 
 # Time services
 persist.timed.enable=true
+
+# Wi-Fi
+wifi.interface=wlan0

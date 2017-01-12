@@ -1,37 +1,9 @@
-# ADSP
-bin/adsprpcd
-vendor/lib/libadsprpc.so
-vendor/lib/libfastcvadsp_stub.so
-vendor/lib/libfastcvopt.so
-
-# Audio ACBD
-etc/acdbdata/Bluetooth_cal.acdb
-etc/acdbdata/General_cal.acdb
-etc/acdbdata/Global_cal.acdb
-etc/acdbdata/Handset_cal.acdb
-etc/acdbdata/Hdmi_cal.acdb
-etc/acdbdata/Headset_cal.acdb
-etc/acdbdata/Speaker_cal.acdb
-
-# Audio libraries
-vendor/lib/libacdb-fts.so
-vendor/lib/libacdbloader.so
-vendor/lib/libacdbrtac.so
-vendor/lib/libadiertac.so
-vendor/lib/libaudcal.so
-vendor/lib/soundfx/libqcbassboost.so
-vendor/lib/soundfx/libqcreverb.so
-vendor/lib/soundfx/libqcvirt.so
-
-# Bluetooth
-bin/hci_qcomm_init
-vendor/lib/libbtnv.so
-
 # Camera
 bin/mm-qcamera-daemon
 lib/hw/camera.msm8952.so
 lib/libmmcamera_interface.so
 lib/libmmjpeg_interface.so
+lib/libmorpho_image_stab31.so
 lib/libmm-qcamera.so
 lib/libqomx_core.so
 vendor/lib/libflash_pmic.so
@@ -110,10 +82,10 @@ vendor/lib/libmmcamera_vpu_module.so
 vendor/lib/libmmjpeg.so
 vendor/lib/libmmqjpeg_codec.so
 vendor/lib/libmmqjpegdma.so
+vendor/lib/libois_lc898122.so
 vendor/lib/libqomx_jpegdec.so
 vendor/lib/libqomx_jpegenc_pipe.so
 vendor/lib/libqomx_jpegenc.so
-vendor/lib/libsensor1.so
 
 # Camera actuators
 vendor/lib/libactuator_ad5816g.so
@@ -215,155 +187,27 @@ etc/firmware/cpp_firmware_v1_5_0.fw
 etc/firmware/cpp_firmware_v1_6_0.fw
 etc/firmware/cpp_firmware_v1_8_0.fw
 
-# DRM
-bin/qseecomd
-vendor/lib/libdrmfs.so
-vendor/lib/libdrmtime.so
-vendor/lib/libQSEEComAPI.so
-vendor/lib/librpmb.so
-vendor/lib/libssd.so
-
-# GPS
-lib/hw/gps.default.so
-lib/libgps.utils.so
-lib/libloc_api_v02.so
-lib/libloc_core.so
-lib/libloc_ds_api.so
-lib/libloc_eng.so
-vendor/lib/hw/flp.default.so
-vendor/lib/libflp.so
-vendor/lib/libgeofence.so
-vendor/lib/libizat_core.so
-vendor/lib/liblbs_core.so
-
-# Graphics
-vendor/lib/egl/eglSubDriverAndroid.so
-vendor/lib/egl/libEGL_adreno.so
-vendor/lib/egl/libGLESv1_CM_adreno.so
-vendor/lib/egl/libGLESv2_adreno.so
-vendor/lib/egl/libq3dtools_adreno.so
-vendor/lib/egl/libq3dtools_esx.so
-vendor/lib/egl/libQTapGLES.so
-vendor/lib/libadreno_utils.so
-vendor/lib/libc2d30-a4xx.so
-vendor/lib/libC2D2.so
-vendor/lib/libCB.so
-vendor/lib/libgsl.so
-vendor/lib/libllvm-glnext.so
-vendor/lib/libllvm-qcom.so
-vendor/lib/libOpenCL.so
-vendor/lib/librs_adreno.so
-
-# Graphics firmware
-etc/firmware/a420_pfp.fw
-etc/firmware/a420_pm4.fw
-
-# IPA
-bin/ipacm-diag
-
-# Keymaster
-vendor/lib/hw/keystore.msm8952.so
-
-# Media
-vendor/lib/libI420colorconvert.so
-vendor/lib/libmm-color-convertor.so
-vendor/lib/libOmxAacDec.so
-vendor/lib/libOmxAlacDec.so
-vendor/lib/libOmxAmrwbplusDec.so
-vendor/lib/libOmxApeDec.so
-vendor/lib/libOmxEvrcDec.so
-vendor/lib/libOmxQcelp13Dec.so
-vendor/lib/libOmxWmaDec.so
-
-# Media firmware
-etc/firmware/venus.b00
-etc/firmware/venus.b01
-etc/firmware/venus.b02
-etc/firmware/venus.b03
-etc/firmware/venus.b04
-etc/firmware/venus.mbn
-etc/firmware/venus.mdt
-etc/firmware/venus-v1.b00
-etc/firmware/venus-v1.b01
-etc/firmware/venus-v1.b02
-etc/firmware/venus-v1.b03
-etc/firmware/venus-v1.b04
-etc/firmware/venus-v1.mbn
-etc/firmware/venus-v1.mdt
-
-# Perf
-bin/msm_irqbalance
-vendor/bin/perfd
-vendor/lib/libqti-perfd-client.so
-
-# Peripheral manager
-bin/pm-service
-vendor/lib/libperipheral_client.so
-
-# Postprocessing
-vendor/bin/mm-pp-daemon
-vendor/lib/libdisp-aba.so
-vendor/lib/libmm-als.so
--vendor/lib/libmm-disp-apis.so
-vendor/lib/libmm-dspp-utils.so
-vendor/lib/libmm-qdcm-diag.so
-vendor/lib/libmm-qdcm.so
-
-# QMI
-bin/irsc_util
-vendor/lib/libdiag.so
-vendor/lib/libdsi_netctrl.so
-vendor/lib/libdsutils.so
-vendor/lib/libidl.so
-vendor/lib/libqcci_legacy.so
-vendor/lib/libqdi.so
-vendor/lib/libqdp.so
-vendor/lib/libqmi_cci.so
-vendor/lib/libqmi_client_helper.so
-vendor/lib/libqmi_client_qmux.so
-vendor/lib/libqmi_common_so.so
-vendor/lib/libqmi_csi.so
-vendor/lib/libqmi_encdec.so
-vendor/lib/libqmiservices.so
-vendor/lib/libqmi.so
-vendor/lib/libsmemlog.so
-
 # Radio
-bin/netmgrd
-bin/qmuxd
-bin/radish
-bin/rmt_storage
--lib/libril.so
-vendor/bin/qti
-vendor/lib/libcneapiclient.so
-vendor/lib/libconfigdb.so
-vendor/lib/liblqe.so
-vendor/lib/libmdmdetect.so
-vendor/lib/libnetmgr.so
-vendor/lib/libqcmaputils.so
-vendor/lib/libril-qc-qmi-1.so
-vendor/lib/libril-qcril-hook-oem.so
-vendor/lib/libsystem_health_mon.so
-vendor/lib/libxml.so
+#bin/rild
+#lib/libril.so
+lib/libuicc.so
+vendor/qcril.db
+
+# Radio - VSS
+lib/libvss_bsp_qcci.so
+lib/libvss_common_core.so
+lib/libvss_common_idl.so
+lib/libvss_common_iface.so
+lib/libvss_dmi_qcci.so
+lib/libvss_gnss_qcci.so
+lib/libvss_ims_qcci.so
+lib/libvss_nv_core.so
+lib/libvss_nv_idl.so
+lib/libvss_nv_iface.so
+lib/libvss_resim_core.so
+lib/libvss_resim_idl.so
+lib/libvss_resim_iface.so
+lib/libvss_sar_qcci.so
 
 # Sensors
-lib/hw/sensors.msm8952.so
-
-# Thermal
-vendor/bin/thermal-engine
-vendor/lib/libthermalclient.so
-vendor/lib/libthermalioctl.so
-
-# Time services
--app/TimeService/TimeService.apk
-bin/time_daemon
--vendor/lib/libtime_genoff.so
--vendor/lib/libTimeService.so
-
-# Widevine
-lib/drm/libdrmwvmplugin.so
-vendor/lib/libdrmdecrypt.so
-vendor/lib/libwvdrm_L1.so
-vendor/lib/libwvm.so
-vendor/lib/libWVStreamControlAPI_L1.so
-vendor/lib/mediadrm/libwvdrmengine.so
+vendor/lib/libsensor_lge_cal.so

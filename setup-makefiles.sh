@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (C) 2016 The CyanogenMod Project
+# Copyright (C) 2017 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -39,20 +39,33 @@ write_headers "msm8952 v521"
 # The standard blobs
 write_makefiles "$MY_DIR"/proprietary-files.txt
 
-if [ "$DEVICE_ARCH" == "64" ]; then
+printf '\n%s\n' "ifeq (\$(FORCE_32_BIT),)" >> "$PRODUCTMK"
+printf '\n%s\n' "ifeq (\$(FORCE_32_BIT),)" >> "$ANDROIDMK"
+
 write_makefiles "$MY_DIR"/proprietary-files-64.txt
-fi
 
-cat << EOF >> "$ANDROIDMK"
+echo "endif" >> "$PRODUCTMK"
+echo "endif" >> "$ANDROIDMK"
 
-\$(shell mkdir -p \$(PRODUCT_OUT)/system/vendor/lib/egl && pushd \$(PRODUCT_OUT)/system/vendor/lib > /dev/null && ln -s egl/libEGL_adreno.so libEGL_adreno.so && popd > /dev/null)
-EOF
+# Qualcomm BSP blobs - we put a conditional around here
+# in case the BSP is actually being built
+printf '\n%s\n' "ifeq (\$(QCPATH),)" >> "$PRODUCTMK"
+printf '\n%s\n' "ifeq (\$(QCPATH),)" >> "$ANDROIDMK"
 
-if [ "$DEVICE_ARCH" == "64" ]; then
-cat << EOF >> "$ANDROIDMK"
-\$(shell mkdir -p \$(PRODUCT_OUT)/system/vendor/lib64/egl && pushd \$(PRODUCT_OUT)/system/vendor/lib64 > /dev/null && ln -s egl/libEGL_adreno.so libEGL_adreno.so && popd > /dev/null)
-EOF
-fi
+write_makefiles "$MY_DIR"/proprietary-files-qc.txt
+printf '\n%s\n' "\$(call inherit-product, vendor/qcom/binaries/msm8916-32/graphics/graphics-vendor.mk)" >> "$PRODUCTMK"
+
+printf '\n%s\n' "ifeq (\$(FORCE_32_BIT),)" >> "$PRODUCTMK"
+printf '\n%s\n' "ifeq (\$(FORCE_32_BIT),)" >> "$ANDROIDMK"
+
+write_makefiles "$MY_DIR"/proprietary-files-qc-64.txt
+printf '\n%s\n' "\$(call inherit-product, vendor/qcom/binaries/msm8916-64/graphics/graphics-vendor.mk)" >> "$PRODUCTMK"
+
+echo "endif" >> "$PRODUCTMK"
+echo "endif" >> "$ANDROIDMK"
+
+echo "endif" >> "$PRODUCTMK"
+echo "endif" >> "$ANDROIDMK"
 
 # We are done with common
 write_footers
@@ -70,10 +83,7 @@ setup_vendor "$DEVICE" "$VENDOR" "$CM_ROOT"
 write_headers
 
 write_makefiles "$MY_DIR"/../$DEVICE/proprietary-files.txt
-
-if [ "$DEVICE_ARCH" == "64" ]; then
 write_makefiles "$MY_DIR"/../$DEVICE/proprietary-files-64.txt
-fi
 
 # We are done with device
 write_footers

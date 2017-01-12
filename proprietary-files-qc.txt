@@ -1,0 +1,230 @@
+# ADSP
+bin/adsprpcd
+vendor/lib/libadsp_default_listener.so
+vendor/lib/libadsprpc.so
+vendor/lib/libfastcvadsp_stub.so
+vendor/lib/libfastcvopt.so
+
+# Audio ACBD
+etc/acdbdata/Bluetooth_cal.acdb
+etc/acdbdata/General_cal.acdb
+etc/acdbdata/Global_cal.acdb
+etc/acdbdata/Handset_cal.acdb
+etc/acdbdata/Hdmi_cal.acdb
+etc/acdbdata/Headset_cal.acdb
+etc/acdbdata/Speaker_cal.acdb
+
+# Audio libraries
+vendor/lib/libacdb-fts.so
+vendor/lib/libacdbloader.so
+vendor/lib/libacdbrtac.so
+vendor/lib/libadiertac.so
+vendor/lib/libaudcal.so
+vendor/lib/soundfx/libqcbassboost.so
+vendor/lib/soundfx/libqcreverb.so
+vendor/lib/soundfx/libqcvirt.so
+
+# Bluetooth
+bin/hci_qcomm_init
+vendor/lib/libbtnv.so
+
+# CNE
+bin/cnd
+etc/cne/SwimConfig.xml
+etc/cne/andsfCne.xml
+etc/permissions/ConnectivityExt.xml
+etc/permissions/cneapiclient.xml
+etc/permissions/com.quicinc.cne.xml
+framework/ConnectivityExt.jar
+framework/cneapiclient.jar
+framework/com.quicinc.cne.jar
+-priv-app/CNEService/CNEService.apk
+vendor/lib/libcne.so
+vendor/lib/libcneapiclient.so
+vendor/lib/libcneqmiutils.so
+vendor/lib/libvendorconn.so
+vendor/lib/libwqe.so
+vendor/lib/libxml.so
+
+# DPM
+#bin/dpmd
+#etc/permissions/com.qti.dpmframework.xml
+#etc/permissions/dpmapi.xml
+#framework/com.qti.dpmframework.jar
+#framework/dpmapi.jar
+#framework/tcmclient.jar
+#-priv-app/dpmserviceapp/dpmserviceapp.apk
+#vendor/lib/libdpmctmgr.so
+#vendor/lib/libdpmfdmgr.so
+#vendor/lib/libdpmframework.so
+#vendor/lib/libdpmnsrm.so
+#vendor/lib/libdpmtcm.so
+
+# DRM
+bin/qseecomd
+vendor/bin/qseeproxydaemon
+vendor/lib/libdrmfs.so
+vendor/lib/libdrmtime.so
+vendor/lib/librpmb.so
+vendor/lib/libqisl.so
+vendor/lib/libQSEEComAPI.so
+vendor/lib/librpmb.so
+vendor/lib/libSecureUILib.so
+vendor/lib/libsecureui.so
+vendor/lib/libsecureui_svcsock.so
+vendor/lib/libsecureuisvc_jni.so
+vendor/lib/libssd.so
+vendor/lib/libStDrvInt.so
+
+# Gatekeeper
+vendor/lib/hw/gatekeeper.msm8952.so
+
+# GPS
+lib/hw/gps.default.so
+lib/libgps.utils.so
+lib/libloc_api_v02.so
+lib/libloc_core.so
+lib/libloc_ds_api.so
+lib/libloc_eng.so
+vendor/lib/hw/flp.default.so
+vendor/lib/libflp.so
+vendor/lib/libgeofence.so
+vendor/lib/libizat_core.so
+vendor/lib/liblbs_core.so
+
+# Graphics firmware
+etc/firmware/a420_pfp.fw
+etc/firmware/a420_pm4.fw
+
+# IPA
+bin/ipacm-diag
+
+# Keymaster
+vendor/lib/hw/keystore.msm8952.so
+
+# Media
+vendor/lib/libI420colorconvert.so
+vendor/lib/libmm-color-convertor.so
+vendor/lib/libOmxAacDec.so
+vendor/lib/libOmxAlacDec.so
+vendor/lib/libOmxAmrwbplusDec.so
+vendor/lib/libOmxApeDec.so
+vendor/lib/libOmxEvrcDec.so
+vendor/lib/libOmxQcelp13Dec.so
+vendor/lib/libOmxWmaDec.so
+
+# Media firmware
+etc/firmware/venus.b00
+etc/firmware/venus.b01
+etc/firmware/venus.b02
+etc/firmware/venus.b03
+etc/firmware/venus.b04
+etc/firmware/venus.mbn
+etc/firmware/venus.mdt
+etc/firmware/venus-v1.b00
+etc/firmware/venus-v1.b01
+etc/firmware/venus-v1.b02
+etc/firmware/venus-v1.b03
+etc/firmware/venus-v1.b04
+etc/firmware/venus-v1.mbn
+etc/firmware/venus-v1.mdt
+
+# Perf
+bin/msm_irqbalance
+vendor/bin/perfd
+vendor/lib/libqti-perfd-client.so
+
+# Peripheral manager
+bin/pm-proxy
+bin/pm-service
+vendor/lib/libperipheral_client.so
+
+# Postprocessing
+vendor/bin/mm-pp-daemon
+vendor/lib/libdisp-aba.so
+vendor/lib/libmm-als.so
+-vendor/lib/libmm-disp-apis.so
+vendor/lib/libmm-dspp-utils.so
+vendor/lib/libmm-qdcm-diag.so
+vendor/lib/libmm-qdcm.so
+
+# QMI
+bin/irsc_util
+vendor/lib/libdiag.so|79596de67a5d02a0896205e527e3eb74dc8331a6
+vendor/lib/libdsi_netctrl.so
+vendor/lib/libdsutils.so
+vendor/lib/libidl.so
+vendor/lib/libqcci_legacy.so
+vendor/lib/libqdi.so
+vendor/lib/libqdp.so
+vendor/lib/libqmi_cci.so
+vendor/lib/libqmi_client_helper.so
+vendor/lib/libqmi_client_qmux.so
+vendor/lib/libqmi_common_so.so
+vendor/lib/libqmi_csi.so
+vendor/lib/libqmi_encdec.so
+vendor/lib/libqmiservices.so
+vendor/lib/libqmi.so
+vendor/lib/libsmemlog.so
+
+# Radio
+bin/ipacm-diag
+bin/netmgrd
+bin/qmuxd
+bin/radish
+bin/rmt_storage
+bin/tftp_server
+etc/data/dsi_config.xml
+etc/data/netmgr_config.xml
+etc/data/qmi_config.xml
+lib/librilqmiservices.so
+vendor/bin/qti
+vendor/lib/libconfigdb.so
+vendor/lib/liblqe.so
+vendor/lib/libmdmdetect.so
+vendor/lib/libnetmgr.so
+vendor/lib/libqcmaputils.so
+vendor/lib/libril-qc-ltedirectdisc.so
+vendor/lib/libril-qc-qmi-1.so
+vendor/lib/libril-qc-radioconfig.so
+vendor/lib/libril-qcril-hook-oem.so
+vendor/lib/libsettings.so
+vendor/lib/libsystem_health_mon.so
+
+# Radio - IMS
+bin/ims_rtp_daemon
+bin/imscmservice
+bin/imsdatadaemon
+bin/imsqmidaemon
+
+# Sensors
+bin/sensors.qcom
+vendor/lib/hw/activity_recognition.msm8952.so
+vendor/lib/libsensor1.so
+vendor/lib/libsensor_reg.so
+vendor/lib/libsensor_test.so
+vendor/lib/libsensor_thresh.so
+vendor/lib/libsensor_user_cal.so
+vendor/lib/sensors.ssc.so
+
+# Thermal
+vendor/bin/thermal-engine
+vendor/lib/libthermalclient.so
+vendor/lib/libthermalioctl.so
+
+# Time services
+-app/TimeService/TimeService.apk|4906aae68b7c6019ce3deacd2e8701d179a1aadb
+bin/time_daemon
+-vendor/lib/libtime_genoff.so
+-vendor/lib/libTimeService.so
+
+# WCNSS
+bin/cnss-daemon
+
+# Widevine
+lib/drm/libdrmwvmplugin.so
+vendor/lib/libdrmdecrypt.so
+vendor/lib/libwvdrm_L1.so
+vendor/lib/libwvm.so
+vendor/lib/libWVStreamControlAPI_L1.so
+vendor/lib/mediadrm/libwvdrmengine.so

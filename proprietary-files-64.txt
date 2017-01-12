@@ -1,0 +1,2 @@
+# Sensors
+#vendor/lib64/libsensor_lge_cal.so
