@@ -179,6 +179,10 @@ on boot
     # Allow access for CCID command/response timeout configuration
     chown system system /sys/module/ccid_bridge/parameters/bulk_msg_timeout
 
+    # Touch gestures
+    chown system system /sys/devices/virtual/input/lge_touch/lpwg_notify
+    chmod 664 /sys/devices/virtual/input/lge_touch/lpwg_notify
+
 # msm specific files that need to be created on /data
 on post-fs-data
     # Create directory for TZ Apps
