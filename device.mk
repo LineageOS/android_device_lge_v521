@@ -104,6 +104,10 @@ PRODUCT_PACKAGES += \
     memtrack.msm8952 \
     liboverlay
 
+# Gestures
+PRODUCT_PACKAGES += \
+    GestureHandler
+
 # Init
 PRODUCT_PACKAGES += \
     fstab.qcom \
