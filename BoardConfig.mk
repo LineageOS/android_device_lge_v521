@@ -124,6 +124,9 @@ TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
 # Keymaster
 TARGET_PROVIDES_KEYMASTER := true
 
+# Media
+TARGET_USES_MEDIA_EXTENSIONS := true
+
 # Power
 TARGET_POWERHAL_VARIANT := qcom
 
