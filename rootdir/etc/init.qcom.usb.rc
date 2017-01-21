@@ -1,29 +1,16 @@
-# Copyright (c) 2011-2012, The Linux Foundation. All rights reserved.
+# Copyright 2013 The Android Open Source Project
 #
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are met:
-#     * Redistributions of source code must retain the above copyright
-#       notice, this list of conditions and the following disclaimer.
-#     * Redistributions in binary form must reproduce the above copyright
-#       notice, this list of conditions and the following disclaimer in the
-#       documentation and/or other materials provided with the distribution.
-#     * Neither the name of The Linux Foundation nor
-#       the names of its contributors may be used to endorse or promote
-#       products derived from this software without specific prior written
-#       permission.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
 #
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-# IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-# NON-INFRINGEMENT ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
-# CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-# EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
-# OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
-# OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#      http://www.apache.org/licenses/LICENSE-2.0
 #
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 on init
     write /sys/class/android_usb/android0/f_rndis/manufacturer LGE
@@ -31,16 +18,45 @@ on init
     write /sys/class/android_usb/android0/f_rndis/wceis 1
     write /sys/class/android_usb/android0/iSerial ${ro.serialno}
 
-on charger
-    setprop sys.usb.config mass_storage
-
 on fs
     mkdir /dev/usb-ffs 0770 shell shell
     mkdir /dev/usb-ffs/adb 0770 shell shell
     mount functionfs adb /dev/usb-ffs/adb uid=2000,gid=2000
     write /sys/class/android_usb/android0/f_ffs/aliases adb
 
-# USB compositions
+service lge-usb-sh /system/bin/sh /init.lge.usb.sh
+    class core
+    user root
+    oneshot
+    seclabel u:r:lge-usb-sh:s0
+
+service lge-usb-def-sh /system/bin/sh /init.lge.usb.default.sh
+    class core
+    user root
+    oneshot
+    disabled
+    seclabel u:r:lge-usb-def-sh:s0
+
+service usbdebug-manager /sbin/usbdebug-manager
+    class late_start
+    user root
+    disabled
+    oneshot
+    seclabel u:r:usbdebug-manager:s0
+
+on usb_debug
+    trigger early-fs
+    trigger fs
+    trigger post-fs
+    trigger post-fs-data
+    trigger usbdebug-manager
+
+on usbdebug-manager
+    start usbdebug-manager
+
+on property:sys.usb.provisioned=1
+    start lge-usb-def-sh
+
 # charging
 on property:sys.usb.config=charging
     write /sys/class/android_usb/android0/enable 0
@@ -88,6 +104,47 @@ on property:sys.usb.config=midi,adb
     start adbd
     setprop sys.usb.state ${sys.usb.config}
 
+################################################################################
+# QCOM
+################################################################################
+
+on init
+    write /sys/module/g_android/parameters/rndis_dl_max_pkt_per_xfer 10
+    write /sys/module/g_android/parameters/rndis_ul_max_pkt_per_xfer 5
+
+on post-fs-data
+    chown system system /sys/devices/platform/lg_diag_cmd/diag_enable
+    chmod 0660 /sys/devices/platform/lg_diag_cmd/diag_enable
+
+################################################################################
+# VZW
+################################################################################
+
+service eut-init-service /system/bin/eut_init
+    class core
+    user root
+    oneshot
+    disabled
+
+service lge-usb-vzw-sh /system/bin/sh /init.lge.usb.vzw.sh
+    class core
+    user root
+    oneshot
+    disabled
+
+on property:sys.boot_completed=1
+    start eut-init-service
+
+on property:persist.sys.usb.diag_enable=*
+    write /sys/devices/platform/lg_diag_cmd/diag_enable ${persist.sys.usb.diag_enable}
+
+on post-fs-data
+    chown system system /sys/class/android_usb/android0/f_cdrom_storage/lun/cdrom_usbmode
+    chmod 0660 /sys/class/android_usb/android0/f_cdrom_storage/lun/cdrom_usbmode
+
+on property:vold.post_fs_data_done=1
+    start lge-usb-vzw-sh
+
 # adb
 on property:sys.usb.config=adb
     write /sys/class/android_usb/android0/enable 0
@@ -131,35 +188,59 @@ on property:sys.usb.config=boot,adb
     start adbd
     setprop sys.usb.state ${sys.usb.config}
 
+# cdrom_storage
+on property:sys.usb.config=cdrom_storage
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/class/android_usb/android0/idVendor 1004
+    write /sys/class/android_usb/android0/idProduct 62C1
+    write /sys/class/android_usb/android0/bDeviceClass 0
+    write /sys/class/android_usb/android0/bDeviceSubClass 0
+    write /sys/class/android_usb/android0/bDeviceProtocol 0
+    write /sys/class/android_usb/android0/functions cdrom_storage
+    write /sys/class/android_usb/android0/f_cdrom_storage/lun/file /system/usbautorun.iso
+    write /sys/class/android_usb/android0/enable 1
+    setprop sys.usb.state ${sys.usb.config}
+
+on property:sys.usb.config=cdrom_storage,adb
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/class/android_usb/android0/idVendor 1004
+    write /sys/class/android_usb/android0/idProduct 62C1
+    write /sys/class/android_usb/android0/bDeviceClass 0
+    write /sys/class/android_usb/android0/bDeviceSubClass 0
+    write /sys/class/android_usb/android0/bDeviceProtocol 0
+    write /sys/class/android_usb/android0/functions cdrom_storage
+    write /sys/class/android_usb/android0/f_cdrom_storage/lun/file /system/usbautorun.iso
+    write /sys/class/android_usb/android0/enable 1
+    setprop sys.usb.state ${sys.usb.config}
+
 # charge_only
 on property:sys.usb.config=charge_only
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor 1004
-    write /sys/class/android_usb/android0/idProduct 631C
+    write /sys/class/android_usb/android0/idProduct 6300
     write /sys/class/android_usb/android0/bDeviceClass 0
     write /sys/class/android_usb/android0/bDeviceSubClass 0
     write /sys/class/android_usb/android0/bDeviceProtocol 0
-    write /sys/class/android_usb/android0/functions mtp
+    write /sys/class/android_usb/android0/functions charge_only
     write /sys/class/android_usb/android0/enable 1
     setprop sys.usb.state ${sys.usb.config}
 
 on property:sys.usb.config=charge_only,adb
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor 1004
-    write /sys/class/android_usb/android0/idProduct 61F9
+    write /sys/class/android_usb/android0/idProduct 6300
     write /sys/class/android_usb/android0/bDeviceClass 0
     write /sys/class/android_usb/android0/bDeviceSubClass 0
     write /sys/class/android_usb/android0/bDeviceProtocol 0
-    write /sys/class/android_usb/android0/functions mtp,adb
+    write /sys/class/android_usb/android0/functions charge_only
     write /sys/class/android_usb/android0/enable 1
-    start adbd
     setprop sys.usb.state ${sys.usb.config}
 
 # mtp
 on property:sys.usb.config=mtp
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor 1004
-    write /sys/class/android_usb/android0/idProduct 633E
+    write /sys/class/android_usb/android0/idProduct 62CE
     write /sys/class/android_usb/android0/bDeviceClass 0
     write /sys/class/android_usb/android0/bDeviceSubClass 0
     write /sys/class/android_usb/android0/bDeviceProtocol 0
@@ -172,7 +253,7 @@ on property:sys.usb.config=mtp
 on property:sys.usb.config=mtp,adb
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor 1004
-    write /sys/class/android_usb/android0/idProduct 633E
+    write /sys/class/android_usb/android0/idProduct 62CE
     write /sys/class/android_usb/android0/bDeviceClass 0
     write /sys/class/android_usb/android0/bDeviceSubClass 0
     write /sys/class/android_usb/android0/bDeviceProtocol 0
@@ -187,7 +268,7 @@ on property:sys.usb.config=mtp,adb
 on property:sys.usb.config=ptp
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor 1004
-    write /sys/class/android_usb/android0/idProduct 631E
+    write /sys/class/android_usb/android0/idProduct 62C5
     write /sys/class/android_usb/android0/bDeviceClass 0
     write /sys/class/android_usb/android0/bDeviceSubClass 0
     write /sys/class/android_usb/android0/bDeviceProtocol 0
@@ -198,7 +279,7 @@ on property:sys.usb.config=ptp
 on property:sys.usb.config=ptp,adb
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor 1004
-    write /sys/class/android_usb/android0/idProduct 631D
+    write /sys/class/android_usb/android0/idProduct 62C6
     write /sys/class/android_usb/android0/bDeviceClass 0
     write /sys/class/android_usb/android0/bDeviceSubClass 0
     write /sys/class/android_usb/android0/bDeviceProtocol 0
@@ -211,7 +292,7 @@ on property:sys.usb.config=ptp,adb
 on property:sys.usb.config=rndis
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor 1004
-    write /sys/class/android_usb/android0/idProduct 6344
+    write /sys/class/android_usb/android0/idProduct 62C4
     write /sys/class/android_usb/android0/bDeviceClass 239
     write /sys/class/android_usb/android0/bDeviceSubClass 2
     write /sys/class/android_usb/android0/bDeviceProtocol 1
@@ -224,7 +305,7 @@ on property:sys.usb.config=rndis
 on property:sys.usb.config=rndis,adb
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor 1004
-    write /sys/class/android_usb/android0/idProduct 6344
+    write /sys/class/android_usb/android0/idProduct 62C4
     write /sys/class/android_usb/android0/bDeviceClass 239
     write /sys/class/android_usb/android0/bDeviceSubClass 2
     write /sys/class/android_usb/android0/bDeviceProtocol 1
@@ -277,21 +358,6 @@ on property:sys.usb.config=factory,adb
 
 # qmicm
 on property:sys.usb.config=qmicm
-    write /sys/class/android_usb/android0/enable 0
-    write /sys/class/android_usb/android0/idVendor 05C6
-    write /sys/class/android_usb/android0/idProduct 9025
-    write /sys/class/android_usb/android0/bDeviceClass 0
-    write /sys/class/android_usb/android0/bDeviceSubClass 0
-    write /sys/class/android_usb/android0/bDeviceProtocol 0
-    write /sys/class/android_usb/android0/f_diag/clients diag
-    write /sys/class/android_usb/android0/f_acm/acm_transports tty
-    write /sys/class/android_usb/android0/functions diag,adb,acm,rmnet
-    write /sys/class/android_usb/android0/enable 1
-    start adbd
-    setprop sys.usb.state ${sys.usb.config}
-
-# qmicm,adb
-on property:sys.usb.config=qmicm,adb
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor 05C6
     write /sys/class/android_usb/android0/idProduct 9025
