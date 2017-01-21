@@ -38,6 +38,9 @@ persist.dpm.feature=0
 ro.qualcomm.cabl=0
 ro.sf.lcd_density=320
 
+# Factory Reset Protection
+ro.frp.pst=/dev/block/bootdevice/by-name/persistent
+
 # Fingerprint
 persist.qfp=false
 
