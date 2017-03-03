@@ -56,13 +56,11 @@ printf '\n%s\n' "ifeq (\$(QCPATH),)" >> "$PRODUCTMK"
 printf '\n%s\n' "ifeq (\$(QCPATH),)" >> "$ANDROIDMK"
 
 write_makefiles "$MY_DIR"/proprietary-files-qc.txt
-printf '\n%s\n' "\$(call inherit-product, vendor/qcom/binaries/msm8952-32/graphics/graphics-vendor.mk)" >> "$PRODUCTMK"
 
 printf '\n%s\n' "ifeq (\$(FORCE_64_BIT),true)" >> "$PRODUCTMK"
 printf '\n%s\n' "ifeq (\$(FORCE_64_BIT),true)" >> "$ANDROIDMK"
 
 write_makefiles "$MY_DIR"/proprietary-files-qc-64.txt
-printf '\n%s\n' "\$(call inherit-product, vendor/qcom/binaries/msm8952-64/graphics/graphics-vendor.mk)" >> "$PRODUCTMK"
 
 echo "endif" >> "$PRODUCTMK"
 echo "endif" >> "$ANDROIDMK"
