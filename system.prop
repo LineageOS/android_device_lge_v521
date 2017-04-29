@@ -58,7 +58,7 @@ ro.product.first_api_level=23
 persist.hwc.mdpcomp.enable=true
 
 # OpenGLES
-ro.opengles.version=196610
+ro.opengles.version=196609
 
 # Perf
 ro.core_ctl_min_cpu=2
