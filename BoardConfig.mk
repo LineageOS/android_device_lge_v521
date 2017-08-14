@@ -14,7 +14,8 @@
 # limitations under the License.
 #
 
-BOARD_VENDOR := lge
+# inherit from common lge
+-include device/lge/common/BoardConfigCommon.mk
 
 TARGET_OTA_ASSERT_DEVICE := v521,b3
 
