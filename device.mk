@@ -134,6 +134,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     GestureHandler
 
+# GPS
+PRODUCT_PACKAGES += \
+    libshims_get_process_name
+
 # Init
 PRODUCT_PACKAGES += \
     fstab.qcom \

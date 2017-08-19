@@ -112,6 +112,10 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 10711093248
 BOARD_CACHEIMAGE_PARTITION_SIZE := 914120704
 TARGET_USERIMAGES_USE_EXT4 := true
 
+# GPS
+TARGET_LD_SHIM_LIBS := \
+    /system/vendor/lib/libizat_core.so|/system/vendor/lib/libshims_get_process_name.so \
+
 # HIDL
 DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml
 
