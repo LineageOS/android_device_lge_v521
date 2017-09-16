@@ -270,5 +270,5 @@ PRODUCT_PACKAGES += \
 # Wifi Firmware
 PRODUCT_PACKAGES += \
     WCNSS_qcom_wlan_nv.bin \
-    WCNSS_cfg.dat \
-    WCNSS_qcom_cfg.ini
+    WCNSS_qcom_cfg.ini \
+		WCNSS_wlan_dictionary.dat
