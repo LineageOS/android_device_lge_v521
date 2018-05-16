@@ -141,11 +141,6 @@ PRODUCT_PACKAGES += \
     init.target.rc \
     ueventd.qcom.rc
 
-# IPACM
-PRODUCT_PACKAGES += \
-    IPACM_cfg.xml \
-    ipacm
-
 # IPv6
 PRODUCT_PACKAGES += \
     ebtables \
