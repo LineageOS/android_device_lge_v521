@@ -71,7 +71,4 @@
     -->
     <integer name="config_longPressOnAppSwitchBehavior">1</integer>
 
-    <!-- Enable blur support -->
-    <bool name="config_uiBlurEnabled">true</bool>
-
 </resources>
