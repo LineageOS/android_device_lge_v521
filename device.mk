@@ -117,7 +117,6 @@ PRODUCT_PACKAGES += \
     copybit.msm8952 \
     gralloc.msm8952 \
     hwcomposer.msm8952 \
-    lights.msm8952 \
     memtrack.msm8952 \
     liboverlay
 
@@ -178,6 +177,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.keymaster@3.0-impl \
     android.hardware.keymaster@3.0-service
+
+# LED
+PRODUCT_PACKAGES += \
+    android.hardware.light@2.0-service.v521
 
 # LiveDisplay
 PRODUCT_PACKAGES += \
