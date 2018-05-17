@@ -218,12 +218,6 @@ vendor/lib/libril-qcril-hook-oem.so
 vendor/lib/libsettings.so|44b7221b87a62f196b59d6beeaf84641a2ca1997
 vendor/lib/libsystem_health_mon.so
 
-# Radio - IMS
-bin/ims_rtp_daemon
-bin/imscmservice
-bin/imsdatadaemon
-bin/imsqmidaemon
-
 # Sensors
 bin/sensors.qcom
 vendor/lib/hw/activity_recognition.msm8952.so
