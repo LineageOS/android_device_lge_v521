@@ -200,8 +200,6 @@ etc/firmware/cpp_firmware_v1_8_0.fw
 lib/hw/consumerir.msm8952.so
 
 # Radio
-bin/rild
-lib/libril.so
 lib/libuicc.so
 vendor/qcril.db
 
