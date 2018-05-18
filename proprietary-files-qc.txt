@@ -83,7 +83,7 @@ vendor/lib/libStDrvInt.so
 vendor/lib/hw/gatekeeper.msm8952.so
 
 # GPS
-lib/hw/gps.default.so
+lib/hw/gps.default.so:vendor/lib/hw/gps.msm8952.so
 lib/libgps.utils.so
 lib/libloc_api_v02.so
 lib/libloc_core.so
