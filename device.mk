@@ -234,7 +234,7 @@ PRODUCT_PACKAGES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    power.msm8952
+    android.hardware.power@1.0-service-qti
 
 # Qualcomm dependencies
 PRODUCT_PACKAGES += \
