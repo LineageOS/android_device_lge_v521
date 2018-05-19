@@ -28,7 +28,7 @@
 
 namespace {
 static constexpr int32_t MIN_VTG_INPUT = 120;
-static constexpr int32_t MAX_VTG_INPUT = 2750;
+static constexpr int32_t MAX_VTG_INPUT = 2900;
 
 static constexpr char MODE_DIRECT[] = "direct";
 static constexpr char MODE_BUFFER[] = "buffer";
