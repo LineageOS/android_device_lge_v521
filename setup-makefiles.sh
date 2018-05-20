@@ -52,23 +52,5 @@ write_makefiles "$MY_DIR"/proprietary-files-64.txt
 echo "endif" >> "$PRODUCTMK"
 echo "endif" >> "$ANDROIDMK"
 
-# Qualcomm BSP blobs - we put a conditional around here
-# in case the BSP is actually being built
-printf '\n%s\n' "ifeq (\$(QCPATH),)" >> "$PRODUCTMK"
-printf '\n%s\n' "ifeq (\$(QCPATH),)" >> "$ANDROIDMK"
-
-write_makefiles "$MY_DIR"/proprietary-files-qc.txt
-
-printf '\n%s\n' "ifeq (\$(FORCE_64_BIT),true)" >> "$PRODUCTMK"
-printf '\n%s\n' "ifeq (\$(FORCE_64_BIT),true)" >> "$ANDROIDMK"
-
-write_makefiles "$MY_DIR"/proprietary-files-qc-64.txt
-
-echo "endif" >> "$PRODUCTMK"
-echo "endif" >> "$ANDROIDMK"
-
-echo "endif" >> "$PRODUCTMK"
-echo "endif" >> "$ANDROIDMK"
-
 # We are done
 write_footers
